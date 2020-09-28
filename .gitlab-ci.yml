@@ -26,6 +26,7 @@ cache:
     - pushd ${BLDDIR}
     - if [[ $NEWSPEC = "yes" ]]; then touch rpm/$YAMLNAME; fi
     - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET prepare      | tee ${OUTDIR}/prepare.log
+    - cat rpm/*.spec
     - cp -rv rpm/* ${OUTDIR}/
     - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET build -j 5   | tee ${OUTDIR}/build.log
     - mkdir -p $OUTDIR/$SFOS_VERSION
