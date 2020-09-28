@@ -37,7 +37,7 @@ sed -i "s/__version__ = '.*'/__version__ = '%{version}-%{release}'/" youtube_dl/
 %install
 rm -rf %{buildroot}
 # >> install pre
-%{__install} -m 755 youtube-dl $RPM_BUILD_ROOT%%{_bindir}/youtube-dl
+%{__install} -m 755 -D youtube-dl $RPM_BUILD_ROOT%{_bindir}/youtube-dl
 # << install pre
 
 # >> install post
