@@ -10,7 +10,7 @@ Name:       youtube-dl
 
 Summary:    YouTube video downloader
 Version:    2020.09.20
-Release:    1.0nep
+Release:    0
 Group:      Applications/Multimedia
 License:    Unlicense
 URL:        https://github.com/ytdl-org/youtube-dl
