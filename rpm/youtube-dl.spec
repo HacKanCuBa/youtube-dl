@@ -26,7 +26,7 @@ sed -i "s/__version__ = '.*'/__version__ = '%{version}-%{release}'/" youtube_dl/
 
 %build
 # >> build pre
-%{make} youtube-dl
+%{__make} youtube-dl
 # << build pre
 
 
