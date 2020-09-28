@@ -19,7 +19,11 @@ cache:
   image: "coderus/sailfishos-platform-sdk:${SFOS_VERSION}"
   script:
     - OUTDIR=~/output
+    - BLDDIR=~/build
     - mkdir -p ${OUTDIR}
+    - mkdir -p ${BLDDIR}
+    - cp -av * ${BLDDIR}
+    - pushd ${BLDDIR}
 #    - python3 setup.py bdist_rpm 2>&1 | tee $OUTDIR/setup_py.log
     - if [[ $NEWSPEC = "yes" ]]; then touch rpm/$YAMLNAME; fi
     - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET prepare      | tee ${OUTDIR}/prepare.log
