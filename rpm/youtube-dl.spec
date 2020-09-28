@@ -21,25 +21,27 @@ Command-line program to download videos from YouTube.com and other video sites
 
 %prep
 # >> setup
+sed -i "s/__version__ = '.*'/__version__ = '%{version}-%{release}'/" youtube_dl/version.py
 # << setup
 
 %build
 # >> build pre
+%{make} youtube-dl
 # << build pre
 
 
 
 # >> build post
-python3 setup.py build
 # << build post
 
 %install
 rm -rf %{buildroot}
 # >> install pre
+%{__install} -m 755 youtube-dl $RPM_BUILD_ROOT%{_bindir}/youtube-dl
 # << install pre
 
 # >> install post
-python3 setup.py install -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+#python3 setup.py install -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 # << install post
 
 %files
