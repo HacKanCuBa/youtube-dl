@@ -13,14 +13,11 @@ URL: https://github.com/ytdl-org/youtube-dl
 Description:
     Command-line program to download videos from YouTube.com and other video sites
 
+PkgBR:
+  - zip
+
 Builder: "none"
 Configure: none
-#%build
-#python3 setup.py build
-#
-#%install
-#python3 setup.py install -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
-
 
 Files:
   - '%{_bindir}/youtube-dl'
