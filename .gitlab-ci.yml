@@ -8,7 +8,7 @@ variables:
   TARGET: "armv7hl"
   SRCVER: 2020.09.20
   NEWSPEC: "yes"
-  YAMLNAME: youtube_dl.yaml
+  YAMLNAME: youtube-dl.yaml
 
 cache:
   paths:
@@ -22,7 +22,7 @@ cache:
     - BLDDIR=~/build
     - mkdir -p ${OUTDIR}
     - mkdir -p ${BLDDIR}
-    - cp -av * ${BLDDIR}
+    - cp -a * ${BLDDIR}
     - pushd ${BLDDIR}
     - if [[ $NEWSPEC = "yes" ]]; then touch rpm/$YAMLNAME; fi
     - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET prepare      | tee ${OUTDIR}/prepare.log
