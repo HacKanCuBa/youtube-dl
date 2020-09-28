@@ -39,8 +39,7 @@ cache:
   artifacts:
     paths:
       - "/home/nemo/output/*"
-      - "/home/nemo/output/$SFOS_VERSION/*"
-    when:always
+    when: always
 
 
 build-arm:
