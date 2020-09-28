@@ -38,10 +38,10 @@ cache:
       - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
   artifacts:
     paths:
-      - "/home/nemo/output/*.yaml"
-      - "/home/nemo/output/*.spec"
-      - "/home/nemo/output/*.log"
-      - "/home/nemo/output/$SFOS_VERSION/*.rpm"
+      - /home/nemo/output/*.yaml
+      - /home/nemo/output/*.spec
+      - /home/nemo/output/*.log
+      - /home/nemo/output/$SFOS_VERSION/*.rpm
     when: always
 
 
