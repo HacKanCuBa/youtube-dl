@@ -1,0 +1,31 @@
+#%define name youtube_dl
+#%define version 2020.09.20
+#%define unmangled_version 2020.09.20
+#%define release 1
+
+Summary: YouTube video downloader
+Name: youtube-dl
+Version: 2020.09.20
+Release: 1.0nephros
+Source0: %{name}-%{version}.tar.gz
+License: Unlicense
+Group: Applications/Multimedia
+#BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+#Prefix: %{_prefix}
+#BuildArch: noarch
+Vendor: Sergey M. <dstftw@gmail.com>
+Url: https://github.com/ytdl-org/youtube-dl
+
+Description:
+    Command-line program to download videos from YouTube.com and other video sites
+
+Builder: "none"
+#%build
+#python3 setup.py build
+#
+#%install
+#python3 setup.py install -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
+
+
+Files:
+  - '%{_bindir}/youtube-dl'

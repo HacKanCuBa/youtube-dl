@@ -7,9 +7,8 @@ variables:
   SFOS_VERSION: 3.3.0.14
   TARGET: "armv7hl"
   SRCVER: 2020.09.20
-  PKGVER: 1.0nephros
-  NEWSPEC: "no"
-  YAMLNAME: openrepos-atomicparsley.yaml
+  NEWSPEC: "yes"
+  YAMLNAME: youtube_dl.yaml
 
 cache:
   paths:
@@ -21,15 +20,17 @@ cache:
   script:
     - OUTDIR=~/output
     - mkdir -p ${OUTDIR}
-    - sed -i -e "s/$SRCVER/${SRCVER}-${PKGVER}/"  youtube_dl/version.py
-    - python3 setup.py bdist_rpm 2>&1 | tee $OUTDIR/setup_py.log
+#    - python3 setup.py bdist_rpm 2>&1 | tee $OUTDIR/setup_py.log
+    - if [[ $NEWSPEC = "yes" ]]; then touch rpm/$YAMLNAME; fi
+    - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET prepare      | tee ${OUTDIR}/prepare.log
+    - cp -rv rpm/* ${OUTDIR}/
+    - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET build -j 5   | tee ${OUTDIR}/build.log
     - mkdir -p $OUTDIR/$SFOS_VERSION
-    - cp -rv dist/* $OUTDIR/$SFOS_VERSION
-    - cp -rv build/bdist.linux-`uname -m`rpm/SPECS/* $OUTDIR/
+    - cp -rv RPMS/* ${OUTDIR}/$SFOS_VERSION
+    - cp -rv rpm/* ${OUTDIR}
   cache:
     paths:
       - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
-      - ~/src
   artifacts:
     paths:
       - "~/output/*.log"
@@ -39,7 +40,7 @@ cache:
     when: always
 
 
-build:
+build-arm:
   extends: .build
   rules:
     - if: '$CI_COMMIT_MESSAGE =~ "Release"'
@@ -51,8 +52,8 @@ build:
   variables:
     TARGET: "armv7hl"
 
-#build-x86:
-#  when: manual
-#  extends: .build
-#  variables:
-#    TARGET: "i486"
+build-x86:
+  when: manual
+  extends: .build
+  variables:
+    TARGET: "i486"
