@@ -32,6 +32,7 @@ cache:
     - mkdir -p $OUTDIR/$SFOS_VERSION
     - cp -rv RPMS/* ${OUTDIR}/$SFOS_VERSION
     - cp -rv rpm/* ${OUTDIR}
+    - ls -lR ${OUTDIR}
   cache:
     paths:
       - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
@@ -41,6 +42,7 @@ cache:
       - "~/output/*.yaml"
       - "~/output/*.spec"
       - "~/output/*"
+      - "~/output/$SFOS_VERSION/*.rpm"
     when: always
 
 
