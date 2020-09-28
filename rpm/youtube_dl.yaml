@@ -14,6 +14,7 @@ Description:
     Command-line program to download videos from YouTube.com and other video sites
 
 Builder: "none"
+Configure: none
 #%build
 #python3 setup.py build
 #
