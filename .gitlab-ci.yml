@@ -1,0 +1,58 @@
+stages:
+  - build
+
+## defaults:
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  SFOS_VERSION: 3.3.0.14
+  TARGET: "armv7hl"
+  SRCVER: 2020.09.20
+  PKGVER: 1.0nephros
+  NEWSPEC: "no"
+  YAMLNAME: openrepos-atomicparsley.yaml
+
+cache:
+  paths:
+    - /var/cache/zypp/
+
+.build:
+  stage: build
+  image: "coderus/sailfishos-platform-sdk:${SFOS_VERSION}"
+  script:
+    - OUTDIR=~/output
+    - mkdir -p ${OUTDIR}
+    - sed -i -e "s/$SRCVER/${SRCVER}-${PKGVER}/"  youtube_dl/version.py
+    - python3 setup.py bdist_rpm 2>&1 | tee $OUTDIR/setup_py.log
+    - mkdir -p $OUTDIR/$SFOS_VERSION
+    - cp -rv dist/* $OUTDIR/$SFOS_VERSION
+    - cp -rv build/bdist.linux-`uname -m`rpm/SPECS/* $OUTDIR/
+  cache:
+    paths:
+      - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
+      - ~/src
+  artifacts:
+    paths:
+      - "~/output/*.log"
+      - "~/output/*.yaml"
+      - "~/output/*.spec"
+      - "~/output/*"
+    when: always
+
+
+build:
+  extends: .build
+  rules:
+    - if: '$CI_COMMIT_MESSAGE =~ "Release"'
+      when: never
+    - changes:
+      - "rpm/*.yaml"
+      - "rpm/*.spec"
+      when: always
+  variables:
+    TARGET: "armv7hl"
+
+#build-x86:
+#  when: manual
+#  extends: .build
+#  variables:
+#    TARGET: "i486"
