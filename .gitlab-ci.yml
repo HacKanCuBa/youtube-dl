@@ -38,12 +38,8 @@ cache:
       - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
   artifacts:
     paths:
-      - "~/output/*.log"
-      - "~/output/*.yaml"
-      - "~/output/*.spec"
-      - "~/output/*"
-      - "~/output/$SFOS_VERSION/*.rpm"
-    when: always
+      - "/home/nemo/output/*"
+    when:always
 
 
 build-arm:
