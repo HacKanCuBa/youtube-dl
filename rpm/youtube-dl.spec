@@ -15,6 +15,7 @@ Group:      Applications/Multimedia
 License:    Unlicense
 URL:        https://github.com/ytdl-org/youtube-dl
 Source100:  youtube-dl.yaml
+BuildRequires:  zip
 
 %description
 Command-line program to download videos from YouTube.com and other video sites
@@ -48,4 +49,3 @@ rm -rf %{buildroot}
 %{_bindir}/youtube-dl
 # >> files
 # << files
-
