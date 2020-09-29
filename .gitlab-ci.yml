@@ -18,6 +18,7 @@ cache:
   stage: build
   image: "coderus/sailfishos-platform-sdk:${SFOS_VERSION}"
   script:
+    # must be a child of $CI_PROJECT_DIR: https://stackoverflow.com/questions/47490688/gitlab-ci-artifacts-not-found#47491693
     - OUTDIR=$CI_PROJECT_DIR/output
     - BLDDIR=~/build
     - mkdir -p ${OUTDIR}
@@ -33,11 +34,13 @@ cache:
     - cp -rv RPMS/* ${OUTDIR}/$SFOS_VERSION
     - cp -rv rpm/* ${OUTDIR}
     - ls -lR ${OUTDIR}
+    - ls -lad /var/cache
   cache:
     paths:
       - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
   artifacts:
     paths:
+      # must be a child of $CI_PROJECT_DIR: https://stackoverflow.com/questions/47490688/gitlab-ci-artifacts-not-found#47491693
       - output/*.yaml
       - output/*.spec
       - output/*.log
