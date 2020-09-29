@@ -18,7 +18,7 @@ cache:
   stage: build
   image: "coderus/sailfishos-platform-sdk:${SFOS_VERSION}"
   script:
-    - OUTDIR=~/output
+    - OUTDIR=$CI_PROJECT_DIR/output
     - BLDDIR=~/build
     - mkdir -p ${OUTDIR}
     - mkdir -p ${BLDDIR}
@@ -38,10 +38,10 @@ cache:
       - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
   artifacts:
     paths:
-      - /home/nemo/output/*.yaml
-      - /home/nemo/output/*.spec
-      - /home/nemo/output/*.log
-      - /home/nemo/output/$SFOS_VERSION/*.rpm
+      - output/*.yaml
+      - output/*.spec
+      - output/*.log
+      - output/$SFOS_VERSION/*.rpm
     when: always
 
 
