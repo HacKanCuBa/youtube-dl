@@ -51,6 +51,7 @@ build-arm:
     - if: '$CI_COMMIT_MESSAGE =~ "Release"'
       when: never
     - changes:
+      - ".gitlab-ci.yml"
       - "rpm/*.yaml"
       - "rpm/*.spec"
       when: always
