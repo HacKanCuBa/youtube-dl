@@ -1,7 +1,7 @@
 Summary: YouTube video downloader
 Name: youtube-dl
 Version: 2020.09.20
-Release: 1.1nep
+Release: 1.2nep
 License: Unlicense
 Group: Applications/Multimedia
 #BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -12,6 +12,9 @@ URL: https://github.com/ytdl-org/youtube-dl
 
 Description:
     Command-line program to download videos from YouTube.com and other video sites
+
+Requires:
+  - ffmpeg-tools
 
 PkgBR:
   - zip
