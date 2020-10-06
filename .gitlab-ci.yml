@@ -13,6 +13,7 @@ variables:
 cache:
   paths:
     - /var/cache/zypp/
+    - "/home/.zypp-cache/"
 
 .build:
   stage: build
@@ -29,22 +30,15 @@ cache:
     - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET prepare      | tee ${OUTDIR}/prepare.log
     - cat rpm/*.spec
     - cp -rv rpm/* ${OUTDIR}/
-    - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET build -j 5   | tee ${OUTDIR}/build.log
+    - mb2 -t SailfishOS-$SFOS_VERSION-$TARGET build --enable-debug   | tee ${OUTDIR}/build.log
     - mkdir -p $OUTDIR/$SFOS_VERSION
     - cp -rv RPMS/* ${OUTDIR}/$SFOS_VERSION
     - cp -rv rpm/* ${OUTDIR}
     - ls -lR ${OUTDIR}
-    - ls -lad /var/cache
-  cache:
-    paths:
-      - /srv/mer/targets/SailfishOS-$SFOS_VERSION-$TARGET/var/cache/zypp/
   artifacts:
     paths:
       # must be a child of $CI_PROJECT_DIR: https://stackoverflow.com/questions/47490688/gitlab-ci-artifacts-not-found#47491693
-      - output/*.yaml
-      - output/*.spec
-      - output/*.log
-      - output/$SFOS_VERSION/*.rpm
+      - output/*
     when: always
 
 
